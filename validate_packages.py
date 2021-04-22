@@ -25,7 +25,7 @@ def check_package_manifest(package):
     dependencies = list(manifest_text['dependencies'].keys())
     return "passed", dependencies
 
-def check_for_at_least_one_dependancy(package, resources):
+def check_for_at_least_one_dependency(package, resources):
     # more care needed here. some are examples or other non-dependency files
     for json_file in package.getnames():
         if not json_file in ["package/package.json","package/.index.json"]:
@@ -50,7 +50,7 @@ for package_name in all_packages:
             status, package_dependencies = check_package_manifest(package)
         if status == "passed":
             # find the dependencies of each package
-            status, package_resources = check_for_at_least_one_dependancy(package, package_resources)
+            status, package_resources = check_for_at_least_one_dependency(package, package_resources)
         # find packages in the folder that aren't found in the description
         if status == "passed":
             if len(package_dependencies) == 0:
@@ -83,11 +83,11 @@ for i in range(len(package_meta.query("status == 'passed'")['dependencies'])):
     for dependency in package_meta.query("status == 'passed'")['dependencies'].iloc[i]:
         all_dependencies.append(dependency)
         
-dependancies = pd.DataFrame({"dependancy": all_dependencies})
+dependancies = pd.DataFrame({"dependency": all_dependencies})
 dependancies['count'] = 1
-dependancies = dependancies.groupby(['dependancy'], as_index=False)['count'].sum()
+dependancies = dependancies.groupby(['dependency'], as_index=False)['count'].sum()
 dependancies = dependancies.sort_values("count", ascending=False)
-dependancies.to_csv("metadata/dependancy_usage.csv", index=False)
+dependancies.to_csv("metadata/dependency_usage.csv", index=False)
 
 
 
