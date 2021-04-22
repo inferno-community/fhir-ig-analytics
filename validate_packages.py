@@ -25,16 +25,16 @@ def check_package_manifest(package):
     dependencies = list(manifest_text['dependencies'].keys())
     return "passed", dependencies
 
-def check_for_at_least_one_dependancy(package, dependencies):
+def check_for_at_least_one_dependancy(package, resources):
     # more care needed here. some are examples or other non-dependency files
     for json_file in package.getnames():
         if not json_file in ["package/package.json","package/.index.json"]:
             string = json_file.strip("package/").strip(".json")
             if "/" not in string:
-                dependencies.append(string)
-    if len(dependencies) == 0:
+                resources.append(string)
+    if len(resources) == 0:
         return "no dependencies", []
-    return "passed", dependencies
+    return "passed", resources
 
 all_packages = os.listdir('output')
 package_meta = pd.DataFrame(columns=['package_name', "status", "dependencies"])
@@ -50,8 +50,7 @@ for package_name in all_packages:
             status, package_dependencies = check_package_manifest(package)
         if status == "passed":
             # find the dependencies of each package
-            status, package_resources == check_for_at_least_one_dependancy(package, package_resources)
-        
+            status, package_resources = check_for_at_least_one_dependancy(package, package_resources)
         # find packages in the folder that aren't found in the description
         if status == "passed":
             if len(package_dependencies) == 0:
@@ -61,13 +60,13 @@ for package_name in all_packages:
                                             "status":status, 
                                             "dependencies":package_dependencies,
                                             "resources":package_resources},
-                                           ignore_index=True)        
+                                           ignore_index=True)
         package.close()
     except:
         # this is where the broken packages go to be forgotten forever
         package_meta = package_meta.append({"package_name":package_name, 
                                             "status":"broken_package",
-                                            "dependencies":dependencies},
+                                            "dependencies":package_dependencies},
                                             ignore_index=True) 
         
 if not os.path.exists("metadata"):
