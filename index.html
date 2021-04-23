@@ -33,7 +33,7 @@ function loadCSV(data) {
 
   if (data == "metadata.csv") {
     var img = document.createElement("IMG");
-    img.src = "metadata/metadata_hist.png";
+    img.src = "py-ig-analytics/metadata/metadata_hist.png";
     img.style.width = '75%';
     img.style.height = 'auto';
     img.style.display = 'block';
@@ -42,7 +42,7 @@ function loadCSV(data) {
   }
 
   $.ajax({
-   url:"metadata/" + data,
+   url:"py-ig-analytics/metadata/" + data,
    dataType:"text",
    success:function(data)
    {

@@ -1,5 +1,5 @@
 dependency,count
-hl7.fhir.r4.core,149
+hl7.fhir.r4.core,150
 hl7.fhir.us.core,34
 fhir.base.template,11
 hl7.fhir.uv.sdc,8
@@ -21,10 +21,10 @@ hl7.fhir.us.vr-common-library,2
 hl7.base.template,2
 hl7.fhir.us.ccda,2
 hl7.org.nz.fhir.ig.nhi,2
+ihe.formatcode.fhir,2
 hl7.fhir.au.base,2
 hl7.fhir.uv.subscriptions-backport,1
 hl7.terminology,1
-ihe.formatcode.fhir,1
 ihe.mhd.fhir,1
 uk.core.r4,1
 hl7.org.nz.base,1
