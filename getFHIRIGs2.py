@@ -13,7 +13,7 @@ sorted_data = sorted(data, key=lambda x: dateutil.parser.parse(x['date']), rever
 seen = set()
 igs = []
 
-for ig in data:
+for ig in sorted_data:
   if ig["package-id"] not in seen: #Take the most recent version of the package, skip duplicates
     seen.add(ig["package-id"])
     igs.append(ig)

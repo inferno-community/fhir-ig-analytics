@@ -71,7 +71,10 @@ for package_name in all_packages:
         
 if not os.path.exists("metadata"):
     os.mkdir("metadata")
-package_meta.to_csv("metadata/metadata.csv", index=False)
+package_meta_copy = package_meta.copy()
+package_meta_copy['dependencies']  = ['; '.join(map(str, l)) for l in package_meta['dependencies']]
+package_meta_copy['resources']  = ['; '.join(map(str, l)) for l in package_meta['resources']]
+package_meta_copy.to_csv("metadata/metadata.csv", index=False)
 
 # save basic seaborn plot of metadaata
 fig, ax = plt.subplots(figsize=[15,5])
