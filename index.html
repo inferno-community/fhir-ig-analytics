@@ -7,7 +7,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  </head>
  <body>
-  <div class="container">
+  <div class="container" style="width:90%">
    <div class="table-responsive">
     <h1 align="center">Implementation Guide Analysis</h1>
     <br />
@@ -31,15 +31,13 @@ function loadCSV(data) {
   var obj = document.getElementById("histogram");
   obj.innerHTML = "";
 
-  if (data == "metadata.csv") {
-    var img = document.createElement("IMG");
-    img.src = "py-ig-analytics/metadata/metadata_hist.png";
-    img.style.width = '75%';
-    img.style.height = 'auto';
-    img.style.display = 'block';
-    img.style.margin = '0 auto';
-    document.getElementById('histogram').appendChild(img);
-  }
+  var img = document.createElement("IMG");
+  img.src = "py-ig-analytics/metadata/"+ data.replace(".csv", "_hist.png");
+  img.style.width = '75%';
+  img.style.height = 'auto';
+  img.style.display = 'block';
+  img.style.margin = '0 auto';
+  document.getElementById('histogram').appendChild(img);
 
   $.ajax({
    url:"py-ig-analytics/metadata/" + data,
@@ -47,7 +45,7 @@ function loadCSV(data) {
    success:function(data)
    {
     var guide_data = data.split(/\r?\n|\r/);
-    var table_data = '<table class="table table-bordered table-striped">';
+    var table_data = '<table class="table table-bordered table-striped table-condensed">';
     for(var count = 0; count<guide_data.length; count++)
     {
      var cell_data = guide_data[count].split(",");
