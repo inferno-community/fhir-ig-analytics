@@ -36,8 +36,8 @@ def analizePackages():
     dependancies = dependancies.sort_values("count", ascending=False)
     fig, ax = plt.subplots(figsize=[25,5])
     fig = sns.barplot(data=dependancies.head(10), x='dependency', y='count').get_figure()
-    fig.savefig("../metadata/dependancies_hist.png")
-    dependancies.to_csv("../metadata/dependency_usage_hist.csv", index=False)
+    fig.savefig("../metadata/dependency_usage_hist.png")
+    dependancies.to_csv("../metadata/dependency_usage.csv", index=False)
 
     all_resources = []
     for i in range(len(package_meta.query("status == 'passed'")['resources'])):
