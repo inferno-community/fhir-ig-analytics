@@ -83,7 +83,6 @@ def validatePackages():
     if not os.path.exists("../metadata"):
         os.mkdir("../metadata")
     package_meta.to_csv("../metadata/metadata.csv")
-    package_meta.to_csv("../metadata/metadata_og.csv")
 
 if __name__ == '__main__':
     validatePackages()
