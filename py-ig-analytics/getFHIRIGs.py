@@ -19,25 +19,25 @@ def getPackages():
             seen.add(ig["package-id"])
             igs.append(ig)
 
-    if os.path.exists('output'):
+    if os.path.exists('../output'):
             print("Warning: Output folder with downloads already exists.")
             user = input("Would you like to delete and download again? Y/N: ")
             if user == "Y" or user == "y":
-                shutil.rmtree('output')
+                shutil.rmtree('../output')
             else:
                 print("Aborted")
                 quit()
             
-    os.makedirs('output')
+    os.makedirs('../output')
 
     for ig in tqdm(igs):
         baseURL = "https://build.fhir.org/ig/"
         packageURL = ig['repo'].replace("qa.json","package.tgz")
 
         try:
-            filename = "output/" + ig["name"] + '.tgz'
+            filename = "../output/" + ig["name"] + '.tgz'
         except:
-            filename = "output/" + ig['package-id'] + '.tgz'
+            filename = "../output/" + ig['package-id'] + '.tgz'
 
         try:
             urllib.request.urlretrieve(baseURL+packageURL, filename)

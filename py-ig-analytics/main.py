@@ -4,7 +4,7 @@ import analytics
 
 if __name__ == '__main__':
     print('Downloading packages')
-    getFHIRIGs.getPackages()
+    # getFHIRIGs.getPackages()
     
     print('Validating packages')
     validate.validatePackages()
